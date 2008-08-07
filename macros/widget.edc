@@ -1,0 +1,12 @@
+#define ENABLE_PROGRAM_PART \
+	 name: "enable"; \
+	 signal: "etk,state,enabled"; \
+	 source: "etk"; \
+         action: STATE_SET "default" 0.0; \
+
+#define DISABLE_PROGRAM_PART \
+	 name: "disable"; \
+	 signal: "etk,state,disabled"; \
+	 source: "etk"; \
+         action: STATE_SET "disabled" 0.0; \
+

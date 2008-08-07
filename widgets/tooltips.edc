@@ -1,0 +1,55 @@
+group {
+   name: "etk/tooltip";
+   data {
+      item: "inset" "5 5 5 5";
+   }
+   parts {
+      part {
+         name: "background";
+         type: RECT;
+         description {
+            state: "default" 0.0;
+	    color: 76 76 76 255;
+            rel1 {
+               relative: 0 0;
+            }
+            rel2 {
+               relative: 1.0 1.0;
+            }
+         }
+      }
+      part {
+         name: "border";
+         type: RECT;
+         mouse_events: 0;
+         description {
+            state: "default" 0.0;
+	    color:  0 0 0 255;
+            rel1 {
+               relative: 0 0;
+               offset: 1 1;
+            }
+            rel2 {
+               relative: 1.0 1.0;
+               offset: -2 -2;
+            }
+         }
+      }
+      part {
+	 name: "etk.swallow.text";
+	 type: SWALLOW;
+         description {
+	    state: "default" 0.0;
+	    color: 0 0 0 255;
+	    rel1 {
+	       relative: 0.0 0.0;
+	       offset:   4   4;
+	    }
+	    rel2 {
+	       relative: 1.0 1.0;
+	       offset:   -5  -5;
+	    }
+	 }
+      }
+   }
+}

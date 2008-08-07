@@ -1,0 +1,59 @@
+#include "macros/colors.edc"
+#include "macros/dnd.edc"
+#include "macros/focus.edc"
+#include "macros/button.edc"
+#include "macros/mdi_window.edc"
+#include "macros/paned.edc"
+#include "macros/scrollbar.edc"
+#include "macros/style.edc"
+#include "macros/toolbar.edc"
+#include "macros/tree_header.edc"
+#include "macros/widget.edc"
+
+data {
+   item: "theme/name"     "Darkness";
+   item: "theme/version"  "0.1.0.004";
+   item: "theme/author"   "Viktor Kojouharov";
+   item: "theme/license"  "Artistic 2.0";
+}
+
+fonts {
+   font: "DejaVuSans.ttf"   "DejaVu";
+   font: "DejaVuSans-Bold.ttf" "DejaVu-Bold";
+   font: "DejaVuSans-Oblique.ttf" "DejaVu-Oblique";
+   font: "DejaVuSans-BoldOblique.ttf" "DejaVu-BoldOblique";
+   font: "DejaVuSansMono.ttf" "DejaVu-Mono";
+}
+
+#include "images/images.edc"
+#include "colors/colors.edc"
+
+collections {
+   #include "widgets/button.edc"
+   #include "widgets/check_button.edc"
+   #include "widgets/colorpicker.edc"
+   #include "widgets/combobox.edc"
+   #include "widgets/combobox_entry.edc"
+   #include "widgets/entry.edc"
+   #include "widgets/frame.edc"
+   #include "widgets/iconbox.edc"
+   #include "widgets/label.edc"
+   #include "widgets/mdi_window.edc"
+   #include "widgets/menu.edc"
+   #include "widgets/notebook.edc"
+   #include "widgets/paned.edc"
+   #include "widgets/progress_bar.edc"
+   #include "widgets/radio_button.edc"
+   #include "widgets/scrollbar.edc"
+   #include "widgets/separator.edc"
+   #include "widgets/shadow.edc"
+   #include "widgets/slider.edc"
+   #include "widgets/spinner.edc"
+   #include "widgets/statusbar.edc"
+   #include "widgets/text_view.edc"
+   #include "widgets/toggle_button.edc"
+   #include "widgets/toolbar.edc"
+   #include "widgets/tooltips.edc"
+   #include "widgets/tree.edc"
+   #include "widgets/windows.edc"
+}

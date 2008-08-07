@@ -1,0 +1,91 @@
+group {
+   name: "etk/text_view";
+   min: 120 18;
+   data {
+      item: "inset" "6 6 6 6";
+   }
+   parts {
+      part {
+         name: "text_view_bg";
+         description {
+            state: "default" 0.0;
+	    color: 250 250 250 100;
+            rel1 {
+               relative: 0.0 0.0;
+               offset: 0 0;
+            }
+            rel2 {
+               relative: 1.0 1.0;
+               offset: -1 -1;
+            }
+            image {
+               normal: "text_view_bg.png";
+               border: 6 6 6 6;
+            }
+            fill {
+               smooth: 0;
+            }
+         }
+	 description {
+	     state: "focused" 0.0;
+	     inherit: "default" 0.0;
+	     color: 200 200 200 250;
+	 }
+      }
+      /*part {
+         name: "text_area";
+         type: SWALLOW;
+         description {
+            state: "default" 0.0;
+            rel1 {
+               relative: 0.0 0.0;
+               offset: 4 3;
+            }
+            rel2 {
+               relative: 1.0 1.0;
+               offset: -5 -3;
+            }
+         }
+      }*/
+      part {
+         name: "text_view_over";
+         description {
+            state: "default" 0.0;
+	    color: 100 100 100 255;
+            rel1 {
+               relative: 0.0 0.0;
+               offset: 0 0;
+            }
+            rel2 {
+               relative: 1.0 1.0;
+               offset: -1 -1;
+            }
+            image {
+               normal: "text_view_over.png";
+               border: 13 13 13 13;
+            }
+            fill {
+               smooth: 0;
+            }
+         }
+      }
+   }
+   programs {
+      program {
+         name: "text_view_focus";
+         signal: "etk,state,focused";
+         source: "etk";
+	 action: STATE_SET "focused" 0.0;
+	 transition: DECELERATE 0.2;
+	 target: "text_view_bg";
+      }
+      program {
+         name: "text_view_unfocus";
+         signal: "etk,state,unfocused";
+         source: "etk";
+	 action: STATE_SET "default" 0.0;
+	 transition: ACCELERATE 0.5;
+	 target: "text_view_bg";
+      }
+   }
+}

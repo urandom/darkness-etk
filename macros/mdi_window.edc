@@ -1,0 +1,163 @@
+/**************************
+ *
+ * Macros for the border's small buttons
+ *
+ *************************/
+
+#define WIN_BUTTON(part_name, rx, ry, ox, oy, detail_image, event_part) \
+   part { \
+      name: part_name"_button"; \
+      description { \
+         state: "default" 0.0; \
+         aspect: 1.25 1.25; \
+         color: 255 255 255 255; \
+         max: 30 24; \
+         rel1 { \
+            relative: rx ry; \
+            offset: ox oy; \
+         } \
+         rel2 { \
+            relative: rx ry; \
+            offset: (ox + 26) (oy + 21); \
+         } \
+         image.normal: "mdi_window_button.png"; \
+         fill.smooth: 0; \
+      } \
+      description { \
+          state: "hover" 0.0; \
+          inherit: "default" 0.0; \
+          color: 255 255 255 0; \
+      } \
+   } \
+   part { \
+       name: part_name"_hover"; \
+       mouse_events: 0; \
+       description { \
+           state: "default" 0.0; \
+           aspect: 1.24138 1.24138; \
+           color: 255 255 255 0; \
+           rel1 { \
+              relative: rx ry; \
+              offset: (ox - 2) (oy - 1); \
+           } \
+           rel2 { \
+              relative: rx ry; \
+              offset: (ox + 29) (oy + 26); \
+           } \
+           image { \
+               normal: "mdi_window_button_"part_name"_hover.png"; \
+               border: 10 10 8 8; \
+           } \
+       } \
+       description { \
+           state: "hover" 0.0; \
+           inherit: "default" 0.0; \
+           color: 255 255 255 255; \
+       } \
+   } \
+   part { \
+      name: part_name"_detail"; \
+      description { \
+         state: "default" 0.0; \
+         color: 255 255 255 255; \
+         min: 16 16; \
+         max: 16 16; \
+         rel1 { \
+            relative: rx ry; \
+            offset: (ox + 7) (oy + 4); \
+         } \
+         rel2 { \
+            relative: rx ry; \
+            offset: (ox + 20) (oy + 17); \
+         } \
+         image.normal: detail_image; \
+         fill.smooth: 0; \
+      } \
+      description { \
+          state: "active" 0.0; \
+          inherit: "default" 0.0; \
+          color: DARKNESS_BUTTON_BLUE 200; \
+      } \
+   } \
+   part { \
+      name: event_part; \
+      type: RECT; \
+      description { \
+         state: "default" 0.0; \
+         color: 255 255 255 0; \
+         rel1 { \
+            relative: rx ry; \
+            offset: ox oy; \
+         } \
+         rel2 { \
+            relative: rx ry; \
+            offset: (ox + 23) (oy + 23); \
+         } \
+      } \
+   } \
+
+#define WIN_BUTTON_PROGRAM(part_name, event_part) \
+   program { \
+      name: part_name"_down"; \
+      signal: "mouse,down,1"; \
+      source: event_part; \
+      action: STATE_SET "default" 0.0; \
+      target: part_name"_detail"; \
+      after: part_name"_down2"; \
+   } \
+   program { \
+      name: part_name"_down2"; \
+      action: STATE_SET "active" 0.0; \
+      target: part_name"_detail"; \
+      transition: LINEAR 0.1; \
+   } \
+   \
+   program { \
+      name: part_name"_up"; \
+      signal: "mouse,up,1"; \
+      source: event_part; \
+      action: STATE_SET "down" 0.0; \
+      target: part_name"_detail"; \
+      after: part_name"_up2"; \
+   } \
+   program { \
+      name: part_name"_up2"; \
+      action: STATE_SET "default" 0.0; \
+      target: part_name"_detail"; \
+      transition: LINEAR 0.1; \
+   } \
+   \
+   program { \
+      name: part_name"_in"; \
+      signal: "mouse,in"; \
+      source: event_part; \
+      action: STATE_SET "default" 0.0; \
+      target: part_name"_button"; \
+      target: part_name"_hover"; \
+      after: part_name"_in2"; \
+   } \
+   program { \
+      name: part_name"_in2"; \
+      action: STATE_SET "hover" 0.0; \
+      target: part_name"_button"; \
+      target: part_name"_hover"; \
+      transition: LINEAR 0.1; \
+   } \
+   \
+   program { \
+      name: part_name"_out"; \
+      signal: "mouse,out"; \
+      source: event_part; \
+      action: STATE_SET "hover" 0.0; \
+      target: part_name"_button"; \
+      target: part_name"_hover"; \
+      after: part_name"_out2"; \
+   } \
+   program { \
+      name: part_name"_out2"; \
+      action: STATE_SET "default" 0.0; \
+      target: part_name"_button"; \
+      target: part_name"_hover"; \
+      transition: LINEAR 0.5; \
+   } \
+

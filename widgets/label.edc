@@ -1,0 +1,64 @@
+styles
+{
+    STYLE("Label", "DejaVu", "DejaVu-Bold", "DejaVu-Oblique", "DejaVu-BoldOblique", "DejaVu-Mono", "10",
+    "color=#ffffff style=shadow shadow_color=#38526d80", /* Normal style */
+    "color=#38526d80 style=soft_shadow shadow_color=#ffffff font=DejaVu-Bold font_size=16", /* Title */
+    "color=#38526d80 style=soft_shadow shadow_color=#ffffff font=DejaVu-Bold font_size=12", /* Subtitle */
+    "color=#ffffff style=glow glow2_color=#38526DA0 glow_color=#263E57EA", /* Glow */
+    "color=#eeeeee font=DejaVu-Oblique" /* Description */
+    )
+    STYLE("Label_disabled", "DejaVu", "DejaVu-Bold", "DejaVu-Oblique", "DejaVu-BoldOblique", "DejaVu-Mono", "10",
+    "color=#cccccc9b style=shadow shadow_color=#38526d80", /* Normal style */
+    "color=#263e5780 style=soft_shadow shadow_color=#ffffff font=DejaVu-Bold font_size=16", /* Title */
+    "color=#263e5780 style=soft_shadow shadow_color=#ffffff font=DejaVu-Bold font_size=12", /* Subtitle */
+    "color=#cccccc9b", /* Glow */
+    "color=#bbbbbb font=DejaVu-Oblique" /* Description */
+    )
+}
+
+group {
+   name: "etk/label";
+   alias: "etk/button/label";
+   alias: "etk/toggle_button/label";
+   alias: "etk/check_button/label";
+   alias: "etk/radio_button/label";
+   alias: "etk/tree/header/label";
+   alias: "etk/tree/header_unique/label";
+   alias: "etk/tree/header_first/label";
+   alias: "etk/tree/header_last/label";
+   alias: "etk/notebook/tab/label";
+   alias: "etk/combobox/button/label";
+   alias: "etk/htoolbar/tool_button/label";
+   alias: "etk/vtoolbar/tool_button/label";
+   parts {
+      part {
+         name: "etk.text.label";
+	 type: TEXTBLOCK;
+         description {
+            state: "default" 0.0;
+	    align: 0.0 0.5;
+	    text {
+		style: "Label";
+		min:   1 1;
+	    }
+         }
+	 description {
+	    state: "disabled" 0.0;
+	    inherit: "default" 0.0;
+            text {
+               style: "Label_disabled";
+            }
+	 }
+      }
+   }
+   programs {
+      program {
+	 ENABLE_PROGRAM_PART
+	 target: "etk.text.label";
+     }
+      program {
+	 DISABLE_PROGRAM_PART
+	 target: "etk.text.label";
+      }
+   }
+}

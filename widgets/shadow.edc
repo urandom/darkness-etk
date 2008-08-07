@@ -1,0 +1,7 @@
+group {
+   name: "etk/shadow";
+   data {
+      item: "color" "56 82 109 155";
+      item: "border_color" "0 0 0 255";
+   }
+}

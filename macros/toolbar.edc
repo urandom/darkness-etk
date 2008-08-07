@@ -1,0 +1,173 @@
+#define TOOL_BUTTON_GROUP(ox1, oy1, ox2, oy2) \
+   parts { \
+      part { \
+         name: "button_rect"; \
+         type: RECT; \
+         description { \
+            state: "default" 0.0; \
+            color: 255 255 255 0; \
+	    min: 48 48; \
+            rel1 { \
+               relative: 0.0 0.0; \
+               offset: ox1 oy1; \
+            } \
+            rel2 { \
+               relative: 1.0 1.0; \
+               offset: ox2 oy2; \
+            } \
+         } \
+      } \
+      part { \
+         name: "etk.swallow.child"; \
+         type: SWALLOW; \
+         description { \
+            state: "active" 0.0; \
+            rel1 { \
+               relative: 0.0 0.0; \
+               offset: 7 7; \
+               to: "button_rect"; \
+            } \
+            rel2 { \
+               relative: 1.0 1.0; \
+               offset: -7 -7; \
+               to: "button_rect"; \
+            } \
+         } \
+      } \
+      TOOL_BUTTON_GLOW_PART("button_rect", ox1, oy1, ox2, oy2, 225); \
+      TOOL_BUTTON_GLOW_DOWN_PART("button_rect", ox1, oy1, ox2, oy2, 140); \
+   } \
+   programs { \
+      program { \
+	 name: "button_pressed"; \
+	 signal: "etk,state,pressed"; \
+	 source: "etk"; \
+	 BUTTON_GLOW_DOWN_ACTION \
+         BUTTON_GLOW_SUDDEN_STOP \
+      } \
+      program { \
+	 name: "button_released"; \
+	 signal: "etk,state,released"; \
+	 source: "etk"; \
+	 BUTTON_GLOW_DOWN_SUDDEN_STOP \
+         BUTTON_GLOW_ACTION \
+      } \
+      program { \
+         name: "button_enter"; \
+         signal: "etk,state,enter"; \
+         source: "etk"; \
+         BUTTON_GLOW_ACTION \
+      } \
+      program { \
+         name: "button_leave"; \
+         signal: "etk,state,leave"; \
+         source: "etk"; \
+         BUTTON_GLOW_STOP \
+      } \
+       \
+      TOOL_BUTTON_GLOW_PROGRAM \
+      TOOL_BUTTON_GLOW_DOWN_PROGRAM \
+   }
+
+#define TOOL_BUTTON_GLOW_PART(rect_part, ox1, oy1, ox2, oy2, alpha) \
+   part { \
+      name: "button_glow"; \
+      mouse_events: 0; \
+      description { \
+         state: "default" 0.0; \
+         color: DARKNESS_LIGHT_BLUE 0; \
+	 fixed: 1 1; \
+	 rel1 { \
+            offset: (ox1 - 2) (oy1 - 2); \
+            to: rect_part; \
+	 } \
+	 rel2 { \
+            offset: (ox2 + 2) (oy2 + 2); \
+            to: rect_part; \
+	 } \
+         image { \
+            normal: "button_glow.png"; \
+            border: 15 15 10 10; \
+         } \
+         fill { \
+            smooth: 0; \
+         } \
+      } \
+      description { \
+         state: "active" 0.0; \
+         inherit: "default" 0.0; \
+         color: DARKNESS_LIGHT_BLUE alpha; \
+      } \
+   }
+
+#define TOOL_BUTTON_GLOW_DOWN_PART(rect_part, ox1, oy1, ox2, oy2, alpha) \
+   part { \
+      name: "button_glow_down"; \
+      mouse_events: 0; \
+      description { \
+         state: "default" 0.0; \
+         color: DARKNESS_LIGHT_BLUE 0; \
+	 fixed: 1 1; \
+	 rel1 { \
+            offset: (ox1 - 2) (oy1 - 2); \
+            to: rect_part; \
+	 } \
+	 rel2 { \
+            offset: (ox2 + 2) (oy2 + 2); \
+            to: rect_part; \
+	 } \
+         image { \
+            normal: "button_glow_down.png"; \
+            border: 15 15 10 10; \
+         } \
+         fill { \
+            smooth: 0; \
+         } \
+      } \
+      description { \
+         state: "active" 0.0; \
+         inherit: "default" 0.0; \
+         color: DARKNESS_LIGHT_BLUE alpha; \
+      } \
+   }
+
+#define TOOL_BUTTON_GLOW_PROGRAM \
+   program { \
+      name: "glow_go_active"; \
+      action: STATE_SET "active" 0.0; \
+      target: "button_glow"; \
+      transition: SINUSOIDAL 0.1; \
+   } \
+   program { \
+      name: "glow_go_inactive"; \
+      action: STATE_SET "default" 0.0; \
+      target: "button_glow"; \
+      transition: SINUSOIDAL 1.0; \
+   } \
+   program { \
+      name: "glow_go_sudden_inactive"; \
+      action: STATE_SET "default" 0.0; \
+      target: "button_glow"; \
+      transition: SINUSOIDAL 0.2; \
+   }
+
+#define TOOL_BUTTON_GLOW_DOWN_PROGRAM \
+   program { \
+      name: "glow_go_down_active"; \
+      action: STATE_SET "active" 0.0; \
+      target: "button_glow_down"; \
+      transition: SINUSOIDAL 0.1; \
+   } \
+   program { \
+      name: "glow_go_down_inactive"; \
+      action: STATE_SET "default" 0.0; \
+      target: "button_glow_down"; \
+      transition: SINUSOIDAL 1.0; \
+   } \
+   program { \
+      name: "glow_go_down_sudden_inactive"; \
+      action: STATE_SET "default" 0.0; \
+      target: "button_glow_down"; \
+      transition: SINUSOIDAL 0.2; \
+   }
+
